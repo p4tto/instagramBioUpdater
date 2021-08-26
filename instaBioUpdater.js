@@ -1,38 +1,38 @@
-const info = require('./info'); // Login e Senha que estão em outro arquivo
-const puppeteer = require('puppeteer'); // Ferramenta para fazer o web scraping
+const info = require('./info'); // Login and Password import
+const puppeteer = require('puppeteer'); // Tool used for the Web Scraping
 
 // Constantes utilizadas
-const login = info.info.loginInsta; // É possível trocar a importação pela 
-const senha = info.info.senhaInsta; //  própria string de login e senha.
+const login = info.info.passwordInsta; // It's possible to change the import
+const password = info.info.passwordInsta; //  with your account credentials directly from here
 
 const inputLogin = "#loginForm > div > div:nth-child(1) > div > label > input";
-const inputSenha = "#loginForm > div > div:nth-child(2) > div > label > input";
-const botaoEntrar = "#loginForm > div > div:nth-child(3) > button";
+const inputPassword = "#loginForm > div > div:nth-child(2) > div > label > input";
+const enterButton = "#loginForm > div > div:nth-child(3) > button";
 
 const urlEdit = "https://www.instagram.com/accounts/edit/";
 const bio = "#pepBio";
-const botaoEnviar= "#react-root > section > main > div > article > form > div:nth-child(10) > div > div > button";
+const sendButton = "#react-root > section > main > div > article > form > div:nth-child(10) > div > div > button";
 
-// Função delay
+// Delay function
 function delay(time){
     return new Promise(function(resolve){
         setTimeout(resolve, time);
     });
 };
 
-// Função porcentagem
-function porcentagemCurso(){
+// Percentage Function
+function percentageMath(){
 
     let i = Date.now()/1000/60/60/24;
-    let diaDoAno = i.toFixed(0) - 18263;
+    let daySinceStart = i.toFixed(0) - 18263;
 
-    let x = (100*diaDoAno)/1461;
+    let x = (100*daySinceStart)/1461;
 
     return String(x.toFixed(1));
 
 };
 
-// Função principal
+// Master Function
 async function attBio(url){
 
     let options = {
@@ -51,11 +51,11 @@ async function attBio(url){
 
     // Login
     await page.type(inputLogin, login );
-    await page.type(inputSenha, senha);
-    await page.click(botaoEntrar);
+    await page.type(inputPassword, password);
+    await page.click(enterButton);
     await delay(3000);
 
-    // Editar Bio
+    // Edit Bio
     await page.goto(urlEdit);
     await delay(500);
 
@@ -64,8 +64,8 @@ async function attBio(url){
     await page.keyboard.press('KeyA');
     await page.keyboard.press('ControlLeft');
 
-    await page.keyboard.type('idade \nCurso - UNI '+ porcentagemCurso() +'%\n alguma info.');
-    await page.click(botaoEnviar);
+    await page.keyboard.type('age \ndegree - UNI '+ percentageMath() +'%\n other info.');
+    await page.click(sendButton);
 
     await browser.close();
 
