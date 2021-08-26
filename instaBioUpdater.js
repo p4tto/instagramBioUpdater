@@ -1,7 +1,7 @@
 const info = require('./info'); // Login and Password import
 const puppeteer = require('puppeteer'); // Tool used for the Web Scraping
 
-// Constantes utilizadas
+// Constants
 const login = info.info.passwordInsta; // It's possible to change the import
 const password = info.info.passwordInsta; //  with your account credentials directly from here
 
